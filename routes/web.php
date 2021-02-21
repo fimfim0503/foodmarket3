@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\MidtransController;
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,15 +16,22 @@ use App\Http\Controllers\API\MidtransController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('dashboard');
 
+//Homepage
 Route::get('/', function () {
-    return view('welcome');
+   return redirect()->route('dashboard');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-
+//dashboard
+Route::prefix('dashboard')
+    ->middleware(['auth:sanctum', 'admin'])
+    ->group(function(){
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::resource('users', UserController::class);
+    });
 
 //Midtrans related
 Route::get('midtrans/success',[MidtransController::class, 'success']);
