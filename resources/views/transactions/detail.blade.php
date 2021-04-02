@@ -11,6 +11,7 @@
                 <div class="flex flex-wrap -mx-4 -mb-4 md:mb-0">
                     <div class="w-full md:w-1/6 px-4 mb-4 md:mb-0">
                         <img src="{{ $item->food->picturePath }}" alt="" class="w-full rounded">
+                        
                     </div>
                     <div class="w-full md:w-5/6 px-4 mb-4 md:mb-0">
                         <div class="flex flex-wrap mb-3">
